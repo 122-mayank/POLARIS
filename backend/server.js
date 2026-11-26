@@ -1,15 +1,26 @@
 import express from "express";
 import cors from "cors";
-import fs from "fs";
-import path from "path";
 import { fileURLToPath } from "url";
-import connectDb from "./config/db.js";
-
+import connectDB from "./config/db.js";
+import expeditionRoutes from "./routes/expeditionRoutes.js";
+import researchRoutes from "./routes/researchRoutes.js";
+import aiResearchRoutes from "./routes/aiResearchRoutes.js";
 import 'dotenv/config';
 
-await connectDb();
+await connectDB();
 
 const app = express();
+
+app.use(express.json());
+
+app.use(cors());
+
+
+app.use("/api/expeditions",expeditionRoutes);
+
+app.use("/api/research", researchRoutes);
+
+app.use("/api/ai-research", aiResearchRoutes);
 
 app.get("/",(req, res)=>{
    res.send("Polaris project would start")

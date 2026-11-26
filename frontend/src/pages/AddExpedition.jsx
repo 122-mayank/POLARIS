@@ -1,6 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 
+const API_URL = (
+    import.meta.env.VITE_API_URL || "http://localhost:5000"
+).replace(/\/+$/, "");
+
+const API_EXP = `${API_URL}/api/expeditions`;
+
 function AddExpedition() {
 
     const [formData, setFormData] = useState({
@@ -48,7 +54,7 @@ function AddExpedition() {
 
 
             await axios.post(
-                "http://localhost:5000/api/expeditions",
+                API_EXP,
                 expedition
             );
 

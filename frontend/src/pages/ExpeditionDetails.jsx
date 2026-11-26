@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+const API_URL = (
+    import.meta.env.VITE_API_URL || "http://localhost:5000"
+).replace(/\/+$/, "");
+
+const API_EXP = `${API_URL}/api/expeditions`;
+
+
 function ExpeditionDetails() {
 
     const { id } = useParams();
@@ -13,7 +20,7 @@ function ExpeditionDetails() {
     useEffect(() => {
 
         axios
-            .get(`http://localhost:5000/api/expeditions/${id}`)
+            .get(`${API_EXP}/${id}`)
             .then((response) => {
 
                 setExpedition(response.data.data);

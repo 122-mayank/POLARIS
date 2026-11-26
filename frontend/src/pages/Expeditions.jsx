@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_URL = (
+    import.meta.env.VITE_API_URL || "http://localhost:5000"
+).replace(/\/+$/, "");
+
+const API_EXP = `${API_URL}/api/expeditions`;
+
 function Expeditions() {
 
     const [expeditions, setExpeditions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+
     useEffect(() => {
 
         axios
-            .get("http://localhost:5000/api/expeditions")
+            .get(API_EXP)
             .then((response) => {
 
                 setExpeditions(response.data.data);

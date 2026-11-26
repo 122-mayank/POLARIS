@@ -1,9 +1,11 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/expeditions";
+const API_URL = (
+    import.meta.env.VITE_API_URL || "http://localhost:5000"
+).replace(/\/+$/, "");
 
 export const getExpeditions = async () => {
-    const response = await axios.get(API_URL);
+    const response = await axios.get(`${API_URL}/api/expeditions`);
 
     return response.data;
 };

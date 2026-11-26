@@ -2,7 +2,11 @@
 import { useState } from "react";
 import "./ResearchAssistant.css";
 
-const API_URL = "http://localhost:5000/api/ai-research";
+const API_URL = (
+    import.meta.env.VITE_API_URL || "http://localhost:5000"
+).replace(/\/+$/, "");
+
+const API_RES = `${API_URL}/api/ai-research`;
 
 const suggestedQuestions = [
   "What are the main findings of the available research papers?",
@@ -35,7 +39,7 @@ function ResearchAssistant() {
     setLoading(true);
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(API_RES, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -13,7 +13,9 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({
+  origin: "https://polaris-frontend.onrender.com"
+}));
 
 
 app.use("/api/expeditions",expeditionRoutes);
